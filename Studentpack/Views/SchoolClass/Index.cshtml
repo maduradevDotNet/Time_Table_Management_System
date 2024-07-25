@@ -1,0 +1,55 @@
+﻿@model List<Studentpack.Models.SchoolClass>
+
+@{
+    ViewData["Title"] = "School Class Index";
+}
+
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col">
+            <h2>School Class Index</h2>
+        </div>
+        <div class="col text-end">
+            <a asp-action="Create" class="btn btn-success">Create New</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ClassId</th>
+                <th>Class Name</th>
+                <th>Description</th>
+                <th>Teacher</th>
+                <th>Number of Students</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var schoolClass in Model)
+            {
+                <tr>
+                    <td>@schoolClass.ClassId</td>
+                    <td>@schoolClass.ClassName</td>
+                    <td>@schoolClass.Description</td>
+                    <td>
+                        @if (schoolClass.Teacher != null)
+                        {
+                            @($"{schoolClass.Teacher.FirstName} {schoolClass.Teacher.LastName}")
+                        }
+                        else
+                        {
+                            <span>N/A</span>
+                        }
+                    </td>
+                    <td>@schoolClass.Students?.Count</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@schoolClass.ClassId" class="btn btn-primary btn-sm">Edit</a>
+                        <a asp-action="Details" asp-route-id="@schoolClass.ClassId" class="btn btn-info btn-sm">Details</a>
+                        <a asp-action="Delete" asp-route-id="@schoolClass.ClassId" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

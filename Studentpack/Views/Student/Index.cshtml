@@ -1,0 +1,51 @@
+﻿@model List<Student>
+
+
+@{
+    ViewData["Title"] = "Student Index";
+}
+
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col">
+            <h2>Student Table</h2>
+        </div>
+        <div class="col text-end">
+            <a asp-action="Create" class="btn btn-success">Create New</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>StudentId</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>DateOfBirth</th>
+                <th>Email</th>
+                <th>ClassId</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>@student.StudentId</td>
+                    <td>@student.FirstName</td>
+                    <td>@student.LastName</td>
+                    <td>@student.DateOfBirth.ToString("yyyy-MM-dd")</td>
+                    <td>@student.Email</td>
+                    <td>@student.ClassId</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@student.StudentId" class="btn btn-primary btn-sm">Edit</a>
+                        <a asp-action="Details" asp-route-id="@student.StudentId" class="btn btn-info btn-sm">Details</a>
+                        <a asp-action="Delete" asp-route-id="@student.StudentId" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
